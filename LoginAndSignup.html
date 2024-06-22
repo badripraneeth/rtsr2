@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>Login and Signup</title>
+        <style>
+            body{
+                font-family: Arial,sans-serif;
+                margin:0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items:center;
+                height:100vh;
+                background-color: #f4f4f4;
+
+        
+            }
+            .container{
+                text-align: center;
+
+            }
+            input{
+                padding: 10px;
+                margin: 5px;
+                width: 250px;
+                border-radius: 5px;
+                border: 1px solid #cccccc;
+
+            }
+            .btn{
+                padding: 10px 20px;
+                font-size: 16PX;
+                cursor: pointer;
+                background-color: #6a4caf;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                text-align: center;
+                display: inline-block;
+                text-decoration: none;
+            }
+            
+    
+
+        </style>
+
+    </head>
+    <body>
+        <div class="container" id="logincontainer">
+            <h1>Login</h1>
+            <form id="loginForm">
+                <input type="text" id="loginUsername"placeholder="Username" required><br>
+                <input type="password" id="loginPassword"placeholder="Password" required><br>
+                <button type="submit"class="btn">Login</button>
+            </form>
+        <p>Don't have an account?<a href="#"id=signupLink>Sign up</a></p>
+        
+        </div>
+        <div class="container" style="display: none;"id="signupContainer">
+            <h2>Sign Up</h2>
+            <form id="signupForm">
+                <input type="text" id="signupUsername"placeholder="Username" required><br>
+                <input type="password" id="signupPassword"placeholder="Password" required><br>
+                <input type="password" id="csignupPassword"placeholder="Confirm Password" required><br>
+                <button type="submit"class="btn">Sign Up</button>
+            </form>
+            <p>Already have an account?<a href="#" id="loginLink">Login</a></p>
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded',function(){
+                const loginForm=document.getElementById('loginForm');
+                const signupLink=document.getElementById('signupLink');
+                const signupContainer=document.getElementById('signupContainer');
+                const loginLink=document.getElementById('loginLink');
+                
+                //Show signup form when "Sign up" link is clicked
+                signupLink.addEventListener('click',function(event){
+                    event.preventDefault();
+                    document.getElementById('signupContainer').style.display='block';
+                    document.getElementById('loginContainer').style.display='none';
+                });
+
+
+                //show login from when "Login" link is clicked
+                loginLink.addEventListener('click',function(event){
+                    event.preventDefault();
+                    document.getElementById('signupContainer').style.display='none';
+                    document.getElementById('loginContainer').style.display='block';
+                });
+
+                //handle login from submission
+                loginForm.addEventListener('submit',function(event){
+                    event.preventDefault();
+                    const username=document.getElementById('loginUsername').value;
+                    const password=document.getElementById('loginPassword').value;
+                    const storedUsername=localStorage.getItem('username');
+
+                    const storedPassword=localStorage.getItem('password');
+                    if(username===storedUsername&&password===storedPassword){
+                        alert('Login successful!');
+                        //redirect to index.html
+                        window.location.href='index.html';
+                    }
+                });
+
+                //handle signup for submission
+                const signupForm=document.getElementById('signupForm');
+                signupForm.addEventListener('submit',function(event){
+                    event.preventDefault();
+                    const username=document.getElementById('signupUsername').value;
+                    const password=document.getElementById('signupPassword').value;
+                    const cpassword=document.getElementById('csignupPassword').value;
+                    if(password!==cpassword){
+                        alert('Passwords does not match!');
+                        return;
+                    }
+                    localStorage.setItem('username',username);
+                    localStorage.setItem('password',password);
+                    alert('Signup successful!You can now login.');
+                    //optionally,automatically redirect to login page
+                    document.getElementById('signupContainer').style.display='none';
+                    document.getElementById('loginContainer').style.display='block';
+                });
+            });
+
+
+
+
+
+                
+
+                
+                
+
+            
+        </script>
+
+
+
+        
+
+    </body>
+</html>
