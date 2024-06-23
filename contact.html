@@ -75,26 +75,42 @@
     <header>
         <h1>Contact Us</h1>
     </header>
-
     <main>
         <p>Have a question or need assistance? Please fill out the form below and we'll get back to you as soon as possible.</p>
+        <form action="https://api.web3forms.com/submit" method="POST">
 
-        <form action="submit_contact_form.php" method="POST">
+            <!-- Replace with your Access Key -->
+            <input type="hidden" name="access_key" value="786eda79-a452-46a4-b636-b9bff6746e82">
+        
+            <!-- Form Inputs. Each input must have a name="" attribute -->
             <label for="name">Your Name:</label>
-            <input type="text" id="name" name="name" required>
+            <input type="text" name="name" required>
 
             <label for="email">Your Email:</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" name="email" required>
 
             <label for="message">Your Message:</label>
-            <textarea id="message" name="message" required></textarea>
-
-            <button type="submit">Send Message</button>
+            <textarea name="message" required></textarea>
+        
+            <!-- Honeypot Spam Protection -->
+            <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+        
+            <!-- Custom Confirmation / Success Page -->
+            <!-- <input type="hidden" name="redirect" value="https://mywebsite.com/thanks.html"> -->
+        
+            <button type="submit">Submit Form</button>
+        
         </form>
     </main>
+    
 
-    <footer>
-        <p>&copy; 2024 Skill Sharing Platform. All rights reserved.</p>
-    </footer>
+
+
+
+
+
+
+    
+    
 </body>
 </html>
